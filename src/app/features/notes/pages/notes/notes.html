@@ -1,0 +1,45 @@
+<div class="notes-page">
+  <app-navbar (searchChanged)="searchNotes($event)"></app-navbar>
+
+  <div class="notes-layout">
+    <app-sidebar (editLabelsClicked)="openEditLabels()"></app-sidebar>
+
+    <main class="notes-content">
+      <app-note-form (noteSaved)="addNote($event)"></app-note-form>
+
+      @if (notes.length > 0) {
+        <div class="notes-grid">
+          @for (note of notes; track note.id) {
+            <app-note-card
+              [note]="note"
+              context="notes"
+              [availableLabels]="labels"
+              (pinChanged)="togglePin($event)"
+              (archiveClicked)="archiveNote($event)"
+              (trashClicked)="trashNote($event)"
+              (reminderClicked)="setReminder($event)"
+              (labelAdded)="addLabelToNote($event)"
+              (labelRemoved)="removeLabelFromNote($event)"
+            ></app-note-card>
+          }
+        </div>
+      }
+
+      @if (notes.length === 0) {
+        <div class="empty-notes">
+          <img
+            src="assets/icons/empty-notes.png"
+            alt="No notes"
+            class="empty-notes-icon"
+          >
+          <p>Notes you add appear here</p>
+        </div>
+      }
+    </main>
+  </div>
+
+  <app-labels
+    [isOpen]="showLabelsModal"
+    (closed)="closeEditLabels()"
+  ></app-labels>
+</div>
