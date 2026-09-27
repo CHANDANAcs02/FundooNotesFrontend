@@ -1,0 +1,54 @@
+<div class="reminders-page">
+
+  <app-navbar></app-navbar>
+
+  <div class="reminders-layout">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="reminders-content">
+
+      @if (notes.length > 0) {
+
+        <div class="reminders-grid">
+
+          @for (note of notes; track note.id) {
+
+            <app-note-card
+              [note]="note"
+              context="reminders"
+              (pinChanged)="togglePin($event)"
+              (archiveClicked)="archiveNote($event)"
+              (trashClicked)="trashNote($event)"
+            ></app-note-card>
+
+          }
+
+        </div>
+
+      }
+
+
+      @if (notes.length === 0) {
+
+        <div class="empty-reminders">
+
+          <img
+            src="assets/icons/reminders.png"
+            alt="Reminders"
+            class="empty-reminders-icon"
+          >
+
+          <p>
+            Notes with reminders appear here
+          </p>
+
+        </div>
+
+      }
+
+    </main>
+
+  </div>
+
+</div>
