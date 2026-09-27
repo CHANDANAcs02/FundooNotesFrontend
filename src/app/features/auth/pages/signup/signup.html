@@ -1,0 +1,237 @@
+<div class="page">
+
+  <div class="signup-card">
+
+    <div class="signup-form">
+
+      <div class="google-logo">
+
+        <span class="blue">G</span>
+        <span class="red">o</span>
+        <span class="yellow">o</span>
+        <span class="blue">g</span>
+        <span class="green">l</span>
+        <span class="red">e</span>
+
+      </div>
+
+      <h1>
+        Create your Google Account
+      </h1>
+
+      <form
+        [formGroup]="signupForm"
+        (ngSubmit)="signup()"
+      >
+
+        <div class="name-row">
+
+          <div class="input-group">
+
+            <input
+              type="text"
+              placeholder="First Name*"
+              formControlName="firstName"
+              autocomplete="given-name"
+            >
+
+            @if (
+              firstName?.invalid &&
+              firstName?.touched
+            ) {
+              <div class="error-message">
+                First name is required.
+              </div>
+            }
+
+          </div>
+
+          <div class="input-group">
+
+            <input
+              type="text"
+              placeholder="Last Name*"
+              formControlName="lastName"
+              autocomplete="family-name"
+            >
+
+            @if (
+              lastName?.invalid &&
+              lastName?.touched
+            ) {
+              <div class="error-message">
+                Last name is required.
+              </div>
+            }
+
+          </div>
+
+        </div>
+
+        <div class="input-group full-width">
+
+          <input
+            type="email"
+            placeholder="Email*"
+            formControlName="email"
+            autocomplete="email"
+          >
+
+          @if (
+            email?.invalid &&
+            email?.touched
+          ) {
+
+            <div class="error-message">
+
+              @if (email?.errors?.['required']) {
+                <span>Email is required.</span>
+              }
+
+              @if (email?.errors?.['email']) {
+                <span>
+                  Enter a valid email address.
+                </span>
+              }
+
+            </div>
+
+          }
+
+        </div>
+
+        <p class="hint">
+          You can use your email address for your FunDoo account.
+        </p>
+
+        <div class="password-row">
+
+          <div class="input-group">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Password*"
+              formControlName="password"
+              autocomplete="new-password"
+            >
+
+          </div>
+
+          <div class="input-group">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Confirm Password*"
+              formControlName="confirmPassword"
+              autocomplete="new-password"
+            >
+
+          </div>
+
+        </div>
+
+        @if (
+          password?.invalid &&
+          password?.touched
+        ) {
+
+          <div class="error-message password-error">
+
+            @if (password?.errors?.['required']) {
+              <span>
+                Password is required.
+              </span>
+            }
+
+            @if (password?.errors?.['minlength']) {
+              <span>
+                Password must contain at least
+                8 characters.
+              </span>
+            }
+
+          </div>
+
+        }
+
+        @if (passwordMismatch) {
+
+          <div class="error-message">
+            Passwords do not match.
+          </div>
+
+        }
+
+        <p class="hint password-hint">
+          Use 8 or more characters with a mix of
+          letters, numbers & symbols.
+        </p>
+
+        <label class="show-password">
+
+          <input
+            type="checkbox"
+            [checked]="showPassword"
+            (change)="togglePassword()"
+          >
+
+          <span>
+            Show password
+          </span>
+
+        </label>
+
+        <!-- SHOW BACKEND ERROR -->
+
+        @if (signupError) {
+          <div class="error-message">
+            {{ signupError }}
+          </div>
+        }
+
+        <div class="bottom-row">
+
+          <a
+            routerLink="/login"
+            class="signin-link"
+          >
+            Sign in instead
+          </a>
+
+          <button
+            type="submit"
+            [disabled]="signupForm.invalid"
+          >
+            Next
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="illustration">
+
+      <div class="shield">
+
+        <div class="person">
+
+          <div class="head"></div>
+
+          <div class="body"></div>
+
+        </div>
+
+      </div>
+
+      <p>
+        One account. All of Google
+        working for you.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
