@@ -1,0 +1,63 @@
+<aside class="sidebar">
+
+  <a
+    routerLink="/notes"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="sidebar-item"
+  >
+    <img src="assets/icons/notes.png" alt="Notes">
+    <span>Notes</span>
+  </a>
+
+  <a
+    routerLink="/notes/reminders"
+    routerLinkActive="active"
+    class="sidebar-item"
+  >
+    <img src="assets/icons/reminders.png" alt="Reminders">
+    <span>Reminders</span>
+  </a>
+
+  <button
+    type="button"
+    class="sidebar-item sidebar-button"
+    (click)="openEditLabels()"
+  >
+    <img src="assets/icons/edit-labels.png" alt="Edit labels">
+    <span>Edit labels</span>
+  </button>
+
+  @for (label of labels; track label.id) {
+    <a
+      [routerLink]="['/notes/label', label.name]"
+      routerLinkActive="active"
+      class="sidebar-item sidebar-label-item"
+    >
+      <img
+        src="assets/icons/label.png"
+        alt="Label"
+      >
+      <span>{{ label.name }}</span>
+    </a>
+  }
+
+  <a
+    routerLink="/notes/archive"
+    routerLinkActive="active"
+    class="sidebar-item"
+  >
+    <img src="assets/icons/archive.png" alt="Archive">
+    <span>Archive</span>
+  </a>
+
+  <a
+    routerLink="/notes/trash"
+    routerLinkActive="active"
+    class="sidebar-item"
+  >
+    <img src="assets/icons/trash.png" alt="Trash">
+    <span>Trash</span>
+  </a>
+
+</aside>
