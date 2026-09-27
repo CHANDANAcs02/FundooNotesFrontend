@@ -1,0 +1,54 @@
+<div class="trash-page">
+
+  <app-navbar></app-navbar>
+
+  <div class="trash-layout">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="trash-content">
+
+      @if (notes.length > 0) {
+
+        <div class="trash-grid">
+
+          @for (note of notes; track note.id) {
+
+            <app-note-card
+              [note]="note"
+              context="trash"
+              (pinChanged)="togglePin($event)"
+              (restoreClicked)="restoreNote($event)"
+              (trashClicked)="deletePermanently($event)"
+            ></app-note-card>
+
+          }
+
+        </div>
+
+      }
+
+
+      @if (notes.length === 0) {
+
+        <div class="empty-trash">
+
+          <img
+            src="assets/icons/trash.png"
+            alt="Trash"
+            class="empty-trash-icon"
+          >
+
+          <p>
+            No notes in Trash
+          </p>
+
+        </div>
+
+      }
+
+    </main>
+
+  </div>
+
+</div>
