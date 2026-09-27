@@ -1,0 +1,51 @@
+<div class="archive-page">
+
+  <app-navbar></app-navbar>
+
+  <div class="archive-layout">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="archive-content">
+
+      @if (notes.length > 0) {
+
+        <div class="archive-grid">
+
+          @for (note of notes; track note.id) {
+
+            <app-note-card
+              [note]="note"
+              context="archive"
+              (pinChanged)="togglePin($event)"
+              (restoreClicked)="restoreNote($event)"
+              (trashClicked)="trashNote($event)"
+            ></app-note-card>
+
+          }
+
+        </div>
+
+      } @else {
+
+        <div class="empty-archive">
+
+          <img
+            src="assets/icons/empty-archive.png"
+            alt="Archived notes"
+            class="empty-archive-icon"
+          >
+
+          <p>
+            Your archived notes appear here
+          </p>
+
+        </div>
+
+      }
+
+    </main>
+
+  </div>
+
+</div>
