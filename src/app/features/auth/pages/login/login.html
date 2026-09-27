@@ -1,0 +1,132 @@
+<div class="login-page">
+
+  <div class="login-card">
+
+    <!-- Google Logo -->
+    <div class="google-logo">
+
+      <span class="blue">G</span>
+      <span class="red">o</span>
+      <span class="yellow">o</span>
+      <span class="blue">g</span>
+      <span class="green">l</span>
+      <span class="red">e</span>
+
+    </div>
+
+    <h1>Login</h1>
+
+    <p class="subtitle">
+      Use your Google Account
+    </p>
+
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+    >
+
+      <!-- EMAIL -->
+
+      <div class="form-field">
+
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email or phone*"
+          autocomplete="email"
+        >
+
+        @if (email?.invalid && email?.touched) {
+
+          <div class="error-message">
+
+            @if (email?.errors?.['required']) {
+              <span>Email is required.</span>
+            }
+
+            @if (email?.errors?.['email']) {
+              <span>Enter a valid email address.</span>
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- PASSWORD -->
+
+      <div class="password-field">
+
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Password*"
+          autocomplete="current-password"
+        >
+
+        <button
+          type="button"
+          class="show-password-button"
+          (click)="togglePassword()"
+        >
+          {{ showPassword ? 'Hide' : 'Show' }}
+        </button>
+
+      </div>
+
+
+      @if (password?.invalid && password?.touched) {
+
+        <div class="error-message">
+          Password is required.
+        </div>
+
+      }
+
+
+      <!-- FORGOT PASSWORD -->
+
+      <a
+        href="javascript:void(0)"
+        class="forgot-password"
+      >
+        Forgot Password?
+      </a>
+
+      @if (loginError) {
+  <div class="error-message">
+    {{ loginError }}
+  </div>
+}
+
+
+      <!-- BOTTOM ROW -->
+
+      <div class="bottom-row">
+
+        <a
+  routerLink="/signup"
+  class="create-account"
+>
+  Create account
+</a>
+
+
+        <button
+          type="submit"
+          class="login-button"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
