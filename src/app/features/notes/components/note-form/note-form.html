@@ -1,0 +1,170 @@
+@if (!isExpanded) {
+
+  <!-- CLOSED COMPOSER -->
+
+  <div
+    class="note-composer"
+    (click)="openEditor()"
+    role="button"
+    tabindex="0"
+  >
+
+    <div class="note-placeholder">
+      Take a note...
+    </div>
+
+    <div class="composer-actions">
+
+      <button
+        type="button"
+        class="composer-icon"
+        aria-label="New checklist"
+        (click)="$event.stopPropagation()"
+      >
+        <img
+          src="assets/icons/checklist.png"
+          alt="Checklist"
+        >
+      </button>
+
+      <button
+        type="button"
+        class="composer-icon"
+        aria-label="New drawing"
+        (click)="$event.stopPropagation()"
+      >
+        <img
+          src="assets/icons/draw.png"
+          alt="Draw"
+        >
+      </button>
+
+      <button
+        type="button"
+        class="composer-icon"
+        aria-label="New image note"
+        (click)="$event.stopPropagation()"
+      >
+        <img
+          src="assets/icons/image.png"
+          alt="Image"
+        >
+      </button>
+
+    </div>
+
+  </div>
+
+}
+
+
+@if (isExpanded) {
+
+  <!-- EXPANDED EDITOR -->
+
+  <div class="editor-wrapper">
+
+    <div class="note-editor">
+
+      <!-- TITLE -->
+
+      <div class="title-row">
+
+        <input
+          type="text"
+          class="title-input"
+          placeholder="Title"
+          [(ngModel)]="title"
+        >
+
+        <button
+          type="button"
+          class="pin-button"
+          [class.pinned]="pinned"
+          (click)="togglePin()"
+          aria-label="Pin note"
+        >
+          <img
+            src="assets/icons/pin.png"
+            alt="Pin"
+          >
+        </button>
+
+      </div>
+
+
+      <!-- CONTENT -->
+
+      <textarea
+        class="content-input"
+        placeholder="Take a note..."
+        [(ngModel)]="content"
+      ></textarea>
+
+
+      <!-- FOOTER -->
+
+      <div class="editor-footer">
+
+        <div class="editor-tools">
+
+          <button
+            type="button"
+            class="editor-icon"
+          >
+            <img
+              src="assets/icons/checklist.png"
+              alt="Checklist"
+            >
+          </button>
+
+          <button
+            type="button"
+            class="editor-icon"
+          >
+            <img
+              src="assets/icons/draw.png"
+              alt="Draw"
+            >
+          </button>
+
+          <button
+            type="button"
+            class="editor-icon"
+          >
+            <img
+              src="assets/icons/image.png"
+              alt="Image"
+            >
+          </button>
+
+        </div>
+
+
+        <div class="editor-actions">
+
+          <button
+            type="button"
+            class="close-button"
+            (click)="closeEditor()"
+          >
+            Close
+          </button>
+
+          <button
+            type="button"
+            class="save-button"
+            (click)="saveNote()"
+          >
+            Save
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
