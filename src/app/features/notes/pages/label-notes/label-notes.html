@@ -1,0 +1,37 @@
+<div class="label-notes-page">
+  <app-navbar></app-navbar>
+
+  <div class="label-notes-layout">
+    <app-sidebar></app-sidebar>
+
+    <main class="label-notes-content">
+      <div class="label-heading">
+        <span class="label-heading-icon">🏷</span>
+        <h2>{{ labelName }}</h2>
+      </div>
+
+      @if (notes.length > 0) {
+        <div class="label-notes-grid">
+          @for (note of notes; track note.id) {
+            <app-note-card
+              [note]="note"
+              context="notes"
+              [availableLabels]="labels"
+              (pinChanged)="togglePin($event)"
+              (archiveClicked)="archiveNote($event)"
+              (trashClicked)="trashNote($event)"
+              (reminderClicked)="setReminder($event)"
+              (labelAdded)="addLabelToNote($event)"
+              (labelRemoved)="removeLabelFromNote($event)"
+            ></app-note-card>
+          }
+        </div>
+      } @else {
+        <div class="empty-label-notes">
+          <div class="empty-label-icon">🏷</div>
+          <p>No notes with this label</p>
+        </div>
+      }
+    </main>
+  </div>
+</div>
