@@ -1,0 +1,134 @@
+@if (isOpen) {
+  <div
+    class="labels-overlay"
+    (click)="close()"
+  >
+    <div
+      class="labels-dialog"
+      (click)="$event.stopPropagation()"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-labels-title"
+    >
+
+      <div class="labels-dialog-header">
+        <h2 id="edit-labels-title">Edit labels</h2>
+      </div>
+
+      <div class="create-label-row">
+
+        <button
+          type="button"
+          class="dialog-icon-button"
+          aria-label="Cancel new label"
+          title="Cancel"
+          (click)="newLabelName = ''"
+        >
+          <span class="dialog-x">×</span>
+        </button>
+
+        <input
+          type="text"
+          [(ngModel)]="newLabelName"
+          placeholder="Create new label"
+          maxlength="50"
+          (keyup.enter)="createLabel()"
+        >
+
+        <button
+          type="button"
+          class="dialog-icon-button"
+          aria-label="Create label"
+          title="Create"
+          (click)="createLabel()"
+        >
+          <span class="dialog-check">✓</span>
+        </button>
+
+      </div>
+
+      <div class="labels-list">
+
+        @for (label of labels; track label.id) {
+
+          <div class="label-row">
+
+            @if (editingLabelId === label.id) {
+
+              <img
+                class="label-symbol"
+                src="assets/icons/label.png"
+                alt="Label"
+              >
+
+              <input
+                class="edit-input"
+                type="text"
+                [(ngModel)]="editingLabelName"
+                maxlength="50"
+                (keyup.enter)="updateLabel()"
+                (keyup.escape)="cancelEditing()"
+              >
+
+              <button
+                type="button"
+                class="dialog-icon-button"
+                aria-label="Save label"
+                title="Save"
+                (click)="updateLabel()"
+              >
+                <span class="dialog-check">✓</span>
+              </button>
+
+            } @else {
+
+              <img
+                class="label-symbol"
+                src="assets/icons/label.png"
+                alt="Label"
+              >
+
+              <span class="label-name">
+                {{ label.name }}
+              </span>
+
+              <button
+                type="button"
+                class="dialog-icon-button edit-button"
+                aria-label="Edit label"
+                title="Edit"
+                (click)="startEditing(label)"
+              >
+                <img
+                  src="assets/icons/edit-labels.png"
+                  alt="Edit"
+                >
+              </button>
+
+            }
+
+          </div>
+
+        }
+
+        @if (labels.length === 0) {
+          <div class="empty-labels">
+            No labels yet
+          </div>
+        }
+
+      </div>
+
+      <div class="labels-dialog-footer">
+        <button
+          type="button"
+          class="done-button"
+          (click)="close()"
+        >
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
