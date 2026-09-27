@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.notes-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.notes-layout {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 74px);
+}
+
+.notes-content {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   SAVED NOTES
+   ========================= */
+
+.notes-grid {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 25px 30px 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================
+   EMPTY NOTES
+   ========================= */
+
+.empty-notes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  width: 300px;
+
+  margin: 70px auto 0;
+}
+
+.empty-notes-icon {
+  width: 120px;
+  height: 120px;
+
+  object-fit: contain;
+  display: block;
+
+  margin-bottom: 18px;
+}
+
+.empty-notes p {
+  margin: 0;
+
+  color: #5f6368;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 20px;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .notes-grid {
+    padding: 20px 15px 30px;
+    gap: 16px;
+  }
+
+  .empty-notes {
+    width: 250px;
+    margin-top: 50px;
+  }
+
+  .empty-notes-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .empty-notes p {
+    font-size: 16px;
+  }
+
+}
