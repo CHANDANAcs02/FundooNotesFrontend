@@ -1,0 +1,271 @@
+<div class="note-card">
+
+  <button
+    type="button"
+    class="pin-button"
+    [class.pinned]="note.pinned"
+    (click)="togglePin()"
+    aria-label="Pin note"
+    title="Pin note"
+  >
+    <img
+      src="assets/icons/pin.png"
+      alt="Pin"
+    >
+  </button>
+
+
+  @if (note.title) {
+    <div class="note-title">
+      {{ note.title }}
+    </div>
+  }
+
+
+  @if (note.content) {
+    <div class="note-content">
+      {{ note.content }}
+    </div>
+  }
+
+
+  @if (note.reminder) {
+
+    <div class="note-reminder">
+
+      <img
+        src="assets/icons/reminders.png"
+        alt="Reminder"
+      >
+
+      <span>
+        {{ formatReminder(note.reminder) }}
+      </span>
+
+    </div>
+
+  }
+
+
+  <!-- LABEL CHIPS -->
+
+  @if (note.labels.length > 0) {
+
+    <div class="note-labels">
+
+      @for (
+        label of note.labels;
+        track label.id
+      ) {
+
+        <span class="label-chip">
+          {{ label.name }}
+        </span>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- ACTIONS -->
+
+  <div class="note-actions">
+
+    @if (context !== 'trash') {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Add reminder"
+        title="Add reminder"
+        (click)="addReminder()"
+      >
+        <img
+          src="assets/icons/reminders.png"
+          alt="Reminder"
+        >
+      </button>
+
+    }
+
+
+    <!-- LABEL BUTTON -->
+
+    @if (context === 'notes') {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Add label"
+        title="Add label"
+        (click)="toggleLabelMenu()"
+      >
+        <img
+          src="assets/icons/edit-labels.png"
+          alt="Label"
+        >
+      </button>
+
+    }
+
+
+    @if (context === 'archive') {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Unarchive note"
+        title="Unarchive"
+        (click)="restoreNote()"
+      >
+        <img
+          src="assets/icons/archive.png"
+          alt="Unarchive"
+        >
+      </button>
+
+    }
+
+
+    @if (context === 'trash') {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Restore note"
+        title="Restore"
+        (click)="restoreNote()"
+      >
+        <img
+          src="assets/icons/archive.png"
+          alt="Restore"
+        >
+      </button>
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Delete permanently"
+        title="Delete permanently"
+        (click)="trashNote()"
+      >
+        <img
+          src="assets/icons/trash.png"
+          alt="Delete permanently"
+        >
+      </button>
+
+    }
+
+
+    @if (
+      context === 'notes' ||
+      context === 'reminders'
+    ) {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Archive note"
+        title="Archive"
+        (click)="archiveNote()"
+      >
+        <img
+          src="assets/icons/archive.png"
+          alt="Archive"
+        >
+      </button>
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Delete note"
+        title="Delete"
+        (click)="trashNote()"
+      >
+        <img
+          src="assets/icons/trash.png"
+          alt="Delete"
+        >
+      </button>
+
+    }
+
+
+    @if (context === 'archive') {
+
+      <button
+        type="button"
+        class="note-action"
+        aria-label="Delete note"
+        title="Delete"
+        (click)="trashNote()"
+      >
+        <img
+          src="assets/icons/trash.png"
+          alt="Delete"
+        >
+      </button>
+
+    }
+
+  </div>
+
+
+  <!-- LABEL POPUP -->
+
+  @if (showLabelMenu) {
+
+    <div
+      class="label-menu"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="label-menu-title">
+        Label note
+      </div>
+
+      @if (availableLabels.length === 0) {
+
+        <div class="no-labels">
+          Create a label first
+        </div>
+
+      }
+
+      @for (
+        label of availableLabels;
+        track label.id
+      ) {
+
+        <label class="label-option">
+
+          <input
+            type="checkbox"
+            [checked]="hasLabel(label.id)"
+            (change)="toggleLabel(label)"
+          >
+
+          <span>
+            {{ label.name }}
+          </span>
+
+        </label>
+
+      }
+
+      <button
+        type="button"
+        class="label-done"
+        (click)="toggleLabelMenu()"
+      >
+        Done
+      </button>
+
+    </div>
+
+  }
+
+</div>
