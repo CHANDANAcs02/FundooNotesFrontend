@@ -1,0 +1,110 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.trash-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.trash-layout {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 74px);
+}
+
+.trash-content {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   TRASH NOTES
+   ========================= */
+
+.trash-grid {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 25px 30px 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================
+   EMPTY TRASH
+   ========================= */
+
+.empty-trash {
+  position: absolute;
+
+  top: 43%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  width: 300px;
+}
+
+.empty-trash-icon {
+  width: 120px;
+  height: 120px;
+
+  object-fit: contain;
+  display: block;
+
+  margin-bottom: 18px;
+}
+
+.empty-trash p {
+  margin: 0;
+
+  color: #5f6368;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 20px;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+  .empty-trash {
+    width: 280px;
+  }
+
+  .empty-trash-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .empty-trash p {
+    font-size: 16px;
+  }
+
+}
